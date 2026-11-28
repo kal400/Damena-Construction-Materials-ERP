@@ -71,6 +71,10 @@ const CATEGORY_META: Record<
   },
 };
 
+const MATERIAL_ITEMS = new Set(['ሲሚንቶ', 'አሸዋ', 'ኮሚቼ', 'ጠጠር']);
+const getEffectiveCategory = (exp: ExpenseRecord): ExpenseCategory =>
+  MATERIAL_ITEMS.has(exp.item_name.trim()) ? 'production_materials' : exp.category;
+
 const formatCurrency = (val: number) =>
   `${Number(val || 0).toLocaleString('en-US', {
     minimumFractionDigits: 0,
@@ -163,8 +167,11 @@ export default function ExpensesPage({
 
   const handleCategoryChange = (nextCategory: 'production_materials' | 'workshop_services') => {
     setCategory(nextCategory);
-    const defaultPreset = CATEGORY_META[nextCategory].presets[0];
-    setSelectedPreset(defaultPreset);
+    const list =
+      hideCementPreset && nextCategory === 'production_materials'
+        ? CATEGORY_META[nextCategory].presets.filter((p) => p !== 'ሲሚንቶ')
+        : CATEGORY_META[nextCategory].presets;
+    setSelectedPreset(list[0] || 'ሌላ ወጪ');
     setCustomItemName('');
   };
 
@@ -186,12 +193,13 @@ export default function ExpensesPage({
 
   // Filtered List
   const filteredExpenses = expenses.filter((e) => {
+    const effCat = getEffectiveCategory(e);
     const matchesCat =
       categoryFilter === 'all'
         ? true
         : categoryFilter === 'production_materials'
-        ? e.category === 'production_materials'
-        : e.category === 'workshop_services' || e.category === 'other';
+        ? effCat === 'production_materials'
+        : effCat === 'workshop_services' || effCat === 'other';
     const q = searchQuery.trim().toLowerCase();
     const matchesSearch =
       !q ||
@@ -543,7 +551,8 @@ export default function ExpensesPage({
           {filteredExpenses.length > 0 ? (
             <div className="space-y-3">
               {pagedExpenses.map((exp) => {
-                const meta = CATEGORY_META[exp.category] || CATEGORY_META.other;
+                const effCat = getEffectiveCategory(exp);
+                const meta = CATEGORY_META[effCat] || CATEGORY_META.other;
                 const orderedQty = exp.quantity != null ? Number(exp.quantity) : null;
                 const verifiedQty = exp.verified_quantity != null ? Number(exp.verified_quantity) : null;
                 const isShortage = orderedQty !== null && verifiedQty !== null && verifiedQty < orderedQty;
@@ -579,7 +588,7 @@ export default function ExpensesPage({
                           </span>
                           <span
                             className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
-                              exp.category === 'production_materials'
+                              effCat === 'production_materials'
                                 ? 'bg-blue-50 text-blue-700 border-blue-200'
                                 : 'bg-amber-50 text-amber-700 border-amber-200'
                             }`}
