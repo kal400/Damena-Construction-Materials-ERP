@@ -1519,7 +1519,7 @@ export default function ReportsView({
                             <td className="py-3 px-4 font-semibold text-slate-800">
                               {recordedBy(exp.profiles ?? null)}
                             </td>
-                            <td className="py-3 px-4 text-xs text-slate-500 max-w-xs truncate">
+                            <td className="py-3 px-4 text-xs text-slate-500 max-w-xs whitespace-normal break-words">
                               {exp.notes || '—'}
                             </td>
                             <td className="py-3 px-4 text-right font-mono font-bold text-rose-600 whitespace-nowrap">

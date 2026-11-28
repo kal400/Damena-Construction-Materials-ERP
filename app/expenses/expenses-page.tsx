@@ -763,7 +763,7 @@ export default function ExpensesPage({
           onClick={() => setEditingItem(null)}
         >
           <div
-            className="bg-white rounded-2xl max-w-md w-full p-6 space-y-4 shadow-xl"
+            className="bg-white rounded-2xl max-w-md w-full p-4 sm:p-6 space-y-4 shadow-xl max-h-[92vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
