@@ -86,7 +86,7 @@ export default async function ManagerExpensesPage({
       expenses={expenses}
       returnTo="/manager/expenses"
       title="ወጪ (ግዢ)"
-      description="ለቴራሶ እና ብሎኬት (ሲሚንቶ፣ አሸዋ፣ ኮሚቼ)፣ ለባትሪ አሲድ እና ለሌሎች ወጪዎች የሚወጣውን ገንዘብ ይመዝግቡ።"
+      description="ለቴራሶ እና ብሎኬት (ሲሚንቶ፣ አሸዋ፣ ኮሚቼ፣ ጠጠር)፣ ለባትሪ አሲድ እና ለሌሎች ወጪዎች የሚወጣውን ገንዘብ ይመዝግቡ።"
       searchParams={await searchParams}
       tableMissing={tableMissing}
     />

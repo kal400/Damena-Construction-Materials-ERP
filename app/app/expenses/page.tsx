@@ -86,7 +86,7 @@ export default async function AdminExpensesPage({
       expenses={visibleExpenses}
       returnTo="/app/expenses"
       title="ወጪ (ግዢ)"
-      description="ለቴራሶ እና ብሎኬት (አሸዋ፣ ኮሚቼ፣ ብረት)፣ ለባትሪ አሲድ እና ለሌሎች ወጪዎች የሚወጣውን ገንዘብ ይመዝግቡ።"
+      description="ለቴራሶ እና ብሎኬት (አሸዋ፣ ኮሚቼ፣ ጠጠር)፣ ለባትሪ አሲድ እና ለሌሎች ወጪዎች የሚወጣውን ገንዘብ ይመዝግቡ።"
       searchParams={await searchParams}
       tableMissing={tableMissing}
       hideCementPreset={isAdmin}

@@ -55,7 +55,7 @@ const CATEGORY_META: Record<
     label: 'ለቴራሶ እና ብሎክ',
     shortLabel: 'ለምርት',
     dot: 'bg-blue-500',
-    presets: ['ሲሚንቶ', 'አሸዋ', 'ኮሚቼ'],
+    presets: ['ሲሚንቶ', 'አሸዋ', 'ኮሚቼ', 'ጠጠር'],
   },
   workshop_services: {
     label: 'ለአገልግሎት',
